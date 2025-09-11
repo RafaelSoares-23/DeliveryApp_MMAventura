@@ -1,0 +1,16 @@
+# Visual Studio
+.vs/
+
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Other temporary files
+*.suo
+*.user
+*.pdb
+*.cache
