@@ -1,4 +1,7 @@
-
+using Application.Services;
+using Application.Services.Implementations;
+using Domain.Interfaces;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Persistence;
 
@@ -11,11 +14,17 @@ namespace DeliveryApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // Dependency Injection registrations
+            builder.Services.AddScoped<ICourierService, CourierService>();
+            builder.Services.AddScoped<ICourierRepository, CourierRepository>();
+
+            // Mapper
+            builder.Services.AddAutoMapper(typeof(Application.Mappings.MappingProfile));
 
             // Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -33,7 +42,6 @@ namespace DeliveryApp
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

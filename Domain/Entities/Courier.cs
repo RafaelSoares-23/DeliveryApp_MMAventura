@@ -12,5 +12,6 @@ public class Courier
     public string PhoneNumber { get; set; }
     public bool IsActive { get; set; }
 
+    // Many-to-Many with Route
     public ICollection<RouteCourier> RouteCouriers { get; set; } = new List<RouteCourier>();
 }
